@@ -82,8 +82,21 @@ export default class GridBackgroundPlugin extends Plugin {
     } else if (paperType === 'lined') {
       const { lineHeight } = this.settings.lined;
       cssContent = `
-        .markdown-source-view,
+        .markdown-source-view .cm-content,
         .markdown-preview-view {
+          position: relative;
+          line-height: ${lineHeight}px !important;
+          padding-top: ${lineHeight / 4}px;
+        }
+      
+        .markdown-source-view .cm-content::before,
+        .markdown-preview-view::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
           background-image: repeating-linear-gradient(
             to bottom,
             rgba(${validColour.match(/\d+, \d+, \d+/)?.[0]}, ${transparency}) 0px,
@@ -91,8 +104,18 @@ export default class GridBackgroundPlugin extends Plugin {
             transparent 1px,
             transparent ${lineHeight}px
           );
+          z-index: 0;
+          pointer-events: none;
         }
+      
+        .markdown-source-view .cm-content > *,
+        .markdown-preview-view > * {
+          position: relative;
+          z-index: 1;
+        }
+
       `;
+      
     } else if (paperType === 'bullet') {
       const { dotSize, dotSpacing } = this.settings.bullet;
       cssContent = `
