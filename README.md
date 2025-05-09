@@ -1,5 +1,4 @@
 # Bookify Obsidian Plugin
-- - - 
 Bookify is a plugin that allows users to add various paper-like backgrounds to their editor, ranging from bullet, grid and lined paper. 
 
 I originally drew inspiration from Primary theme’s grid setting, and I wanted to expand that functionality to other themes via a plugin :)
